@@ -7,15 +7,24 @@
 </head>
 <body>
   <h1>Ejemplo de notificación web</h1>
-  <button onclick="showNotification()">Mostrar notificación</button> 
+  <button onclick="subscribeToNotifications()">Mostrar notificación</button>
   <script>
-    function showNotification() {
-      if ('Notification' in window) {
-        Notification.requestPermission().then(permission => {
+    async function subscribeToNotifications() {
+      if ('serviceWorker' in navigator) {
+        try {
+          const registration = await navigator.serviceWorker.register('service-worker.js');
+          const permission = await Notification.requestPermission();
+          
           if (permission === 'granted') {
-            const notification = new Notification('¡Hola!');
+            const options = {
+              body: '¡Hola!',
+              icon: 'path/to/icon.png' // Reemplaza con la ruta a tu icono de notificación
+            };
+            registration.showNotification('Notificación de prueba', options);
           }
-        });
+        } catch (error) {
+          console.error('Error registrando el Service Worker:', error);
+        }
       } else {
         alert('Las notificaciones no están soportadas en este navegador.');
       }
