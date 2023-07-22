@@ -7,6 +7,7 @@
 </head>
 <body>
   <h1>Ejemplo de notificación web</h1>
+  <button onclick="showNotification()">Mostrar notificación</button> 
   <script>
     function showNotification() {
       if ('Notification' in window) {
@@ -18,11 +19,6 @@
         alert('Las notificaciones no están soportadas en este navegador.');
       }
     }
-
-    // Llama a la función para mostrar la notificación cuando se carga la página.
-    window.addEventListener('load', () => {
-      showNotification();
-    });
   </script>
 </body>
 </html>
