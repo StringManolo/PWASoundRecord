@@ -58,7 +58,7 @@ function detectClaps(stream) {
   const bufferLength = analyser.frequencyBinCount;
   const dataArray = new Uint8Array(bufferLength);
 
-  const clapThreshold = 30; // Ajusta este valor según la intensidad de los aplausos.
+  const clapThreshold = 35; // Ajusta este valor según la intensidad de los aplausos.
 
   let clapCount = 0;
   let lastClapTime = 0;
