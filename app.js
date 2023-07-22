@@ -1,28 +1,27 @@
 // En este archivo puedes agregar cualquier lógica adicional que desees para tu PWA.
 
 // Solicita al usuario el acceso al micrófono
+// app.js
 async function getMicrophone() {
   try {
-    alert('Mostrando una notificación...');
+    // Mostrar notificación solicitando acceso al micrófono.
     showNotification('Solicitando acceso al micrófono...');
     const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-    detectClaps(stream); 
+    detectClaps(stream);
   } catch (err) {
     alert('Error al acceder al micrófono:', err);
   }
 }
 
-
-// Solicita al usuario el acceso a las notificaciones
 function showNotification(message) {
-  if ('Notification' in window && Notification.permission === 'granted') {
-    new Notification(message);
-  } else if ('Notification' in window && Notification.permission !== 'denied') {
+  if ('Notification' in window && Notification.permission !== 'granted') {
     Notification.requestPermission().then(permission => {
       if (permission === 'granted') {
         new Notification(message);
       }
     });
+  } else if ('Notification' in window && Notification.permission === 'granted') {
+    new Notification(message);
   }
 }
 
