@@ -30,18 +30,18 @@ function showNotification(message) {
     Notification.requestPermission().then(permission => {
       if (permission === 'granted') {
         if (registration) {
-          registration.showNotification('Notificación de prueba', {
+          registration.showNotification('Notificación de Audio', {
             body: message,
-            icon: 'path/to/icon.png' // Reemplaza con la ruta a tu icono de notificación
+            icon: 'icon-16x16.png' 
           });
         }
       }
     });
   } else if ('Notification' in window && Notification.permission === 'granted') {
     if (registration) {
-      registration.showNotification('Notificación de prueba', {
+      registration.showNotification('Notificación de Audio', {
         body: message,
-        icon: 'path/to/icon.png' // Reemplaza con la ruta a tu icono de notificación
+        icon: 'icon-16x16.png' // Reemplaza con la ruta a tu icono de notificación
       });
     }
   }
@@ -58,7 +58,7 @@ function detectClaps(stream) {
   const bufferLength = analyser.frequencyBinCount;
   const dataArray = new Uint8Array(bufferLength);
 
-  const clapThreshold = 10; // Ajusta este valor según la intensidad de los aplausos.
+  const clapThreshold = 30; // Ajusta este valor según la intensidad de los aplausos.
 
   let clapCount = 0;
   let lastClapTime = 0;
@@ -66,8 +66,6 @@ function detectClaps(stream) {
   analyser.fftSize = 2048;
 
   function checkClap() {
-    showNotification('Analizando audio...');
-
     analyser.getByteFrequencyData(dataArray);
 
     let sum = 0;
@@ -84,7 +82,7 @@ function detectClaps(stream) {
       }
 
       if (clapCount === 3) {
-        showNotification('Encendiendo las luces');
+        showNotification('Encendiendo las luces...');
         clapCount = 0;
       }
 
