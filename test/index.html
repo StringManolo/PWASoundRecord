@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Notificación de prueba</title>
+</head>
+<body>
+  <h1>Ejemplo de notificación web</h1>
+  <script>
+    function showNotification() {
+      if ('Notification' in window) {
+        Notification.requestPermission().then(permission => {
+          if (permission === 'granted') {
+            const notification = new Notification('¡Hola!', {
+              body: 'Esta es una notificación de prueba.'
+            });
+          }
+        });
+      }
+    }
+
+    // Llama a la función para mostrar la notificación cuando se carga la página.
+    window.addEventListener('load', () => {
+      showNotification();
+    });
+  </script>
+</body>
+</html>
+
